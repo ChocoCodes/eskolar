@@ -41,6 +41,10 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* ====== CUSTOM COLORS ====== */
+  --color-gold: #FDB913;
+  --color-gold-hover: #EFAE11;
 }
 
 :root {
