@@ -45,6 +45,7 @@
   /* ====== CUSTOM COLORS ====== */
   --color-gold: #FDB913;
   --color-gold-hover: #EFAE11;
+  --color-gray-outline: #DFDEDA;
 }
 
 :root {
