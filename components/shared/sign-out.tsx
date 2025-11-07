@@ -1,14 +1,12 @@
-import { createClient } from "@supabase/supabase-js"
+"use client"
+import { useSupabaseClient } from '@/hooks/useSupabase'
 import { redirect } from 'next/navigation'
 import { PiSignOutFill } from "react-icons/pi"
 import { Button } from "@/components/ui/button";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
-
 export const SignOutButton = () => {
+    const { supabase } = useSupabaseClient()
+    
     const handleSignOut = async () => {
         const { error } = await supabase.auth.signOut();
         if(error) {

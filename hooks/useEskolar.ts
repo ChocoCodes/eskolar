@@ -1,43 +1,49 @@
+"use client"
 import { useState, useEffect } from 'react'
 import { useSupabaseAuthUser, useSupabaseClient } from './useSupabase';
+import { PostgrestError } from '@supabase/supabase-js';
 
 export const useEskolar = () => {
+    const { user, loading: userLoading, error: authUserError } = useSupabaseAuthUser();
     const { supabase } = useSupabaseClient();
-    const { user, error: authUserError } = useSupabaseAuthUser();
     const [profile, setProfile] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
     const fetchProfile = async () => {
-        // No query will be performed if there is no user
         if (!user) {
-            setLoading(false)
-            return
+            return;
         }
+        setLoading(true);
+        // No query will be performed if there is no user
 
-        setLoading(true)
-        setError(null)
+        setLoading(true);
+        setError(null);
 
-        const { data: eSkolarProfile, error } = await supabase  
+        const { data: eSkolarProfile, error: supabaseError } = await supabase  
             .from("profiles")
             .select("*")
             .eq("user_id", user.id)
-            .single()
+            .single();
 
         if (authUserError) {
-            setError(authUserError)
-        } else if (error) {
-            setError(error instanceof Error ? error.message : 'An unknown error occured.')
+            setError(authUserError);
+        } else if (supabaseError) {
+            setError(supabaseError instanceof PostgrestError ? supabaseError.message : 'An unknown error occured.');
         } else {
-            setProfile(eSkolarProfile)
+            setProfile(eSkolarProfile);
         }
 
         setLoading(false);
     }
 
     useEffect(() => {
-        fetchProfile();
-    }, [user])
+        if (!userLoading && user) {
+            fetchProfile();
+        } else if (!userLoading && !user) {
+            setLoading(false);
+        }
+    }, [userLoading, user])
 
-    return { profile, loading, error };
+    return { profile, loading: userLoading || loading, error };
 }

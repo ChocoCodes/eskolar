@@ -5,8 +5,8 @@ interface SummarySectionProps {
 
 export const SummarySection = ({ title, listItems }: SummarySectionProps) => {
     return (
-        <div className='flex flex-col gap-2 items-left'>
-            <p className='text-3xl font-medium'>{ title }</p>
+        <div className='flex flex-col gap-1 items-left'>
+            <p className='text-xl font-medium'>{ title }</p>
             <ul className='list-disc'>
                 {listItems.map((item, index) => (
                     <li key={ index } >{ item }</li>

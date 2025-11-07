@@ -36,7 +36,7 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
       })
       if (error) throw error
       // Update this route to redirect to an authenticated route. The user already has an active session.
-      router.push('/protected')
+      router.push('/protected/profile')
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : 'An error occurred')
     } finally {
@@ -84,7 +84,7 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
                 />
               </div>
               {error && <p className="text-sm text-red-500">{error}</p>}
-              <Button type="submit" className="w-full bg-gold hover:cursor-pointer hover:text-gold-hover text-black" disabled={ isLoading }>
+              <Button type="submit" className="w-full bg-gold hover:cursor-pointer hover:bg-gold-hover text-black" disabled={ isLoading }>
                 {isLoading ? 'Logging in...' : 'Login'}
               </Button>
             </div>
