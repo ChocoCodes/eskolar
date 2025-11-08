@@ -16,7 +16,7 @@ interface HeaderProps {
 
 const navItemsData = [
   {
-    href: "/protected/profile",
+    href: "/profile",
     text: "Profile",
   },
   {
@@ -24,7 +24,7 @@ const navItemsData = [
     text: "Discover",
   },
   {
-    href: "/protected/application",
+    href: "/application",
     text: "Application",
   },
   {
