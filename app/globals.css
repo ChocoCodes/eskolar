@@ -43,9 +43,9 @@
   --radius-xl: calc(var(--radius) + 4px);
 
   /* ====== CUSTOM COLORS ====== */
-  --color-gold: #FDB913;
-  --color-gold-hover: #EFAE11;
-  --color-gray-outline: #DFDEDA;
+  --color-gold: #fdb913;
+  --color-gold-hover: #efae11;
+  --color-gray-outline: #dfdeda;
 }
 
 :root {
@@ -124,4 +124,9 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+html,
+body {
+  box-sizing: border-box;
 }
