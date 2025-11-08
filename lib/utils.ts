@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
+import { IconType } from 'react-icons'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -45,4 +46,9 @@ export const timeSinceUpdate = (dateString: string): string => {
 
     const years = Math.round(elapsed / msPerYear);
     return years === 1 ? '1 year ago' : `${years} years ago`;
+}
+
+export type SocialLink = {
+  url: string;
+  platform: "facebook" | "linkedin" | "github";
 }
