@@ -14,7 +14,7 @@ export function ChatHistory() {
     return (
         <div className="flex flex-col justify-start gap-4 p-4">
             <Link
-                href="/protected/chat"
+                href="/chat"
                 className="flex justify-start items center gap-4 p-2 rounded-lg border border-gray-300 hover:bg-gold/20 hover:border-gold hover:border-l-4 transition:color duration-200 group"
             >
                 <SquarePen className="text-gray-400 group-hover:text-gold" />
