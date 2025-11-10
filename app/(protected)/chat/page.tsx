@@ -3,13 +3,13 @@
 import { useEskolar } from "@/hooks/useEskolar";
 import Header from "@/components/shared/header";
 import { BetaNotice } from "@/components/shared/beta-notice";
+import { Loading } from "@/components/shared/loading";
 import { ChatHistory } from "@/components/chat/chat-history";
 import { ChatDisplay } from "@/components/chat/chat-display";
 
 export default function ChatPage() {
-
     const { profile, loading, error } = useEskolar();
-    if (loading) return <p>Loading</p>;
+    if (loading) return <Loading />;
     if (error) return <p className="text-red">An error occurred.</p>;
 
     const firstName: string = profile.full_name.split(' ')[0];

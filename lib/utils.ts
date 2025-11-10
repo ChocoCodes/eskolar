@@ -52,3 +52,16 @@ export type SocialLink = {
   url: string;
   platform: "facebook" | "linkedin" | "github";
 }
+
+export type GrantType = "Full Grant" | "Partial Grant" | "Financial Assistance";
+
+export type ScholarshipFilters = {
+    location?: string;
+    financialCoverage?: GrantType[];
+    school?: string;
+    course?: string;
+    cutoffMax?: number | null;
+    eRecommendMatch?: string;
+    deadline?: string;
+}
+

@@ -3,27 +3,9 @@
 import Header from '@/components/shared/header';
 import { SummarySection } from '@/components/shared/summary-section';
 import { BetaNotice } from '@/components/shared/beta-notice';
+import { Loading } from '@/components/shared/loading';
 import { useEskolar } from '@/hooks/useEskolar';
 import { ProfileHeader, ProfileInfo } from '@/components/profile/_components';
-
-const sampleData = [
-  {
-    title: "Achievements",
-    listItems: ["A", "B", "C"]
-  },
-  {
-    title: "Credentials",
-    listItems: ["A", "B", "C"]
-  },
-  {
-    title: "Extracurriculars",
-    listItems: ["A", "B", "C"]
-  },
-  {
-    title: "Skills & Interests",
-    listItems: ["A", "B", "C"]
-  },
-];
 
 export default function ProfilePage() {
   const { profile, showcase, loading, error } = useEskolar();
@@ -34,7 +16,7 @@ export default function ProfilePage() {
     { title: "Skills & Interests", listItems: showcase.skills.map((item: { title: string }) => item.title) },
   ]
 
-  if (loading) return <p>Loading</p>;
+  if (loading) return <Loading />;
   if (error) return <p className="text-red">An error occured.</p>;
   console.log(profile);
   return (

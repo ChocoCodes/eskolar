@@ -46,6 +46,7 @@
   --color-gold: #fdb913;
   --color-gold-hover: #efae11;
   --color-gray-outline: #dfdeda;
+  --color-dark-grayish-blue: #4B5563;
 }
 
 :root {
@@ -129,4 +130,18 @@
 html,
 body {
   box-sizing: border-box;
+}
+
+/* Customize slider colors */
+.slider-gold::-webkit-slider-thumb {
+  background-color: var(--color-gold); /* Tailwind yellow-400 */
+}
+.slider-gold::-webkit-slider-runnable-track {
+  background-color: #fef3c7; /* light gold track */
+}
+.slider-gold::-moz-range-thumb {
+  background-color: var(--color-gold); 
+}
+.slider-gold::-moz-range-track {
+  background-color: #fef3c7;
 }
