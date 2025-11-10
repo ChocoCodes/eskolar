@@ -83,7 +83,7 @@ function SearchBar({
         {/* Advanced Filters */}
         <Button
           variant="outline"
-          className="text-muted-foreground ring-1 !ring-gray-outline flex justify-center gap-2"
+          className="text-muted-foreground ring-1 ring-gray-outline! flex justify-center gap-2"
           onClick={() => alert("Advanced Filters coming soon!")}
         >
           <FaFilter className="size-3" />

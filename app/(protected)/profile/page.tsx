@@ -6,25 +6,6 @@ import { BetaNotice } from '@/components/shared/beta-notice';
 import { useEskolar } from '@/hooks/useEskolar';
 import { ProfileHeader, ProfileInfo } from '@/components/profile/_components';
 
-const sampleData = [
-  {
-    title: "Achievements",
-    listItems: ["A", "B", "C"]
-  },
-  {
-    title: "Credentials",
-    listItems: ["A", "B", "C"]
-  },
-  {
-    title: "Extracurriculars",
-    listItems: ["A", "B", "C"]
-  },
-  {
-    title: "Skills & Interests",
-    listItems: ["A", "B", "C"]
-  },
-];
-
 export default function ProfilePage() {
   const { profile, showcase, loading, error } = useEskolar();
   const profileSummary = [

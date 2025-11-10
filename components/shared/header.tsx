@@ -40,7 +40,7 @@ export default function Header({ imageUrl, imageDesc }: HeaderProps ) {
                 <Image src="/eskolar-logo.png" alt="eSkolar Logo" width={128} height={128} className="object-fit" />
                 <ul className="flex gap-8">
                     { navItemsData.map((navItem, index) => (
-                        <NavItem key={ index } href={ `/protected${navItem.href}` } text={ navItem.text } />
+                        <NavItem key={ index } href={ navItem.href } text={ navItem.text } />
                     ))}
                 </ul>
             </div>
