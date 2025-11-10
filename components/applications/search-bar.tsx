@@ -37,13 +37,14 @@ function SearchBar({
 
   return (
     <Container className="mt-8">
-      <div className="grid grid-cols-10 gap-4 items-center">
+      <div className="grid grid-cols-10 gap-4 items-center sm:grid-cols-12">
         {/* Search Input */}
-        <InputGroup className="col-span-8 ring-1 ring-gray-outline">
+        <InputGroup className="col-span-10 sm:col-span-10 ring-1 ring-gray-outline">
           <InputGroupInput
             placeholder="Search by program name, provider, or type..."
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
+            className="truncate w-full"
           />
           <InputGroupAddon
             role="button"
@@ -55,14 +56,15 @@ function SearchBar({
         </InputGroup>
 
         {/* Status Filter */}
-        <InputGroup className="col-span-1 ring-1 ring-gray-outline flex">
+        <InputGroup className="col-span-5 sm:col-span-1 ring-1 ring-gray-outline flex min-w-0">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <InputGroupButton
                 variant="ghost"
-                className="text-sm text-muted-foreground w-full flex justify-between h-full"
+                className="text-sm text-muted-foreground w-full flex justify-between h-full truncate"
               >
-                {displayStatus} <ChevronDownIcon className="size-3" />
+                <span className="truncate">{displayStatus}</span>
+                <ChevronDownIcon className="size-3 shrink-0 ml-1" />
               </InputGroupButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="[--radius:0.95rem]">
@@ -83,11 +85,11 @@ function SearchBar({
         {/* Advanced Filters */}
         <Button
           variant="outline"
-          className="text-muted-foreground ring-1 ring-gray-outline! flex justify-center gap-2"
+          className="col-span-5 sm:col-span-1 text-muted-foreground ring-1 !ring-gray-outline flex justify-center items-center gap-2 truncate"
           onClick={() => alert("Advanced Filters coming soon!")}
         >
-          <FaFilter className="size-3" />
-          Advanced Filters
+          <FaFilter className="size-3 shrink-0" />
+          <span className="truncate">Advanced Filters</span>
         </Button>
       </div>
     </Container>
