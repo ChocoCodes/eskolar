@@ -41,7 +41,7 @@ export const ScholarshipFilter = () => {
             <label htmlFor='location' className='inline-flex flex-col gap-1 text-lg'>
                 Location
                 <div className="relative w-full">
-                    <input type="text" name="location" id="location" value={ filters.location } className='w-full border-2 border-gray-outline rounded-sm h-8 px-2 text-sm placeholder-dark-grayish-blue' placeholder='Enter suburb, city, or, region...' />
+                    <input type="text" name="location" id="location" value={ filters.location } onChange={ handleInputChange } className='w-full border-2 border-gray-outline rounded-sm h-8 px-2 text-sm placeholder-dark-grayish-blue' placeholder='Enter suburb, city, or, region...' />
                     <FaLocationDot className='absolute right-2 top-1/2 -translate-y-1/2 text-sm text-dark-grayish-blue'/>
                 </div>
             </label>
@@ -83,7 +83,7 @@ export const ScholarshipFilter = () => {
                         className="absolute -bottom-5 w-10 text-center text-sm font-medium text-white bg-gold rounded"
                         style={{ left: `calc(${ filters.cutoffMax }% - 1.25rem)` }}
                     >
-                        { filters.cutoffMax }%
+                        { filters.cutoffMax || 0 }%
                     </div>
                     <input 
                         type="range" 

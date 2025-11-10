@@ -65,3 +65,21 @@ export type ScholarshipFilters = {
     deadline?: string;
 }
 
+export type Scholarship = {
+    programImg: string;
+    programName: string;
+    issuer: string;
+    financialCoverage: string;
+    status: string;
+    eligibility: string;
+    awardValue: number;
+    deadline: string;
+    cutoff: number;
+    slots: number;
+    tags: string[];
+    eRecommendMatch: string;
+};
+
+export const toTitleCase = (str: string) => {
+  return str.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+}
