@@ -4,7 +4,15 @@ import Link from "next/link";
 import { timeSinceUpdate } from "@/lib/utils";
 import {useSearchParams} from "next/navigation";
 
-export function ChatHistoryTile({chatItem}: {chatItem: {id: string, title: string, updated_at: string}}) {
+type ChatHistoryTileProps = {
+    chatItem: {
+        id: string;
+        title: string;
+        updated_at: string;
+    };
+}
+
+export function ChatHistoryTile({chatItem}: ChatHistoryTileProps) {
     const searchParams = useSearchParams();
     const sessionId = searchParams.get('sessionId');
 
@@ -12,10 +20,10 @@ export function ChatHistoryTile({chatItem}: {chatItem: {id: string, title: strin
         <Link
             href={`?sessionId=${chatItem.id}`}
             className={
-                `border border-gray-300 rounded-md p-4 
+                `border rounded-md p-4 
                 ${sessionId == chatItem.id 
-                    ? ' bg-gold/20 border-l-4 border-l-gold' 
-                    : ' hover:border-l-4 hover:border-l-gold hover:bg-gold/20 transition:color duration-200'}`
+                    ? ' bg-gold/20 border-l-4 border-gold' 
+                    : ' border-gray-300 hover:border-l-4 hover:border-gold hover:bg-gold/20 transition:color duration-200'}`
             }
         >
             <div className="flex justify-between items-center">
