@@ -1,8 +1,9 @@
 "use client";
 
-import {useEffect, useState, useCallback} from "react";
-import {useSupabaseAuthUser, useSupabaseClient} from "@/hooks/useSupabase";
+import { useEffect, useState, useCallback } from "react";
+import { useSupabaseAuthUser, useSupabaseClient } from "@/hooks/useSupabase";
 import { PostgrestError } from '@supabase/supabase-js';
+import { Message } from '@/lib/utils'
 
 type ChatSession = {
     id: string;
@@ -10,14 +11,6 @@ type ChatSession = {
     title: string;
     created_at: string;
     updated_at: string;
-}
-
-type Message = {
-    id: string;
-    session_id: string;
-    sender: 'skolar' | 'bot';
-    message: string;
-    sent_at: string;
 }
 
 export const useChatHistory = () => {
@@ -96,7 +89,7 @@ export const useChatMessages = (sessionId: string) => {
         }
     }, [user, sessionId, fetchMessages]);
 
-    return { messages, loading: userLoading || loading, error };
+    return { messages, setMessages, loading: userLoading || loading, error };
 }
 
 export const useCreateChatSession = () => {
@@ -146,4 +139,63 @@ export const useCreateChatSession = () => {
     }, [user, supabase, authUserError]);
 
     return { createChatSession, sessionId, loading: userLoading || loading, error };
+}
+
+export const useSendMessage = () => {
+    const { supabase } = useSupabaseClient();
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
+
+    const sendMessage = async (sessionId: string, message: string) => {
+        if (!sessionId) throw new Error("Chat Session ID is required.");
+
+        setLoading(true);
+        setError(null);
+        
+        try {
+            // Save user message first
+            const { error: userMessageError } = await supabase
+                .from('chat_messages')
+                .insert({
+                    session_id: sessionId,
+                    sender: 'skolar',
+                    message: message
+                });
+
+            if (userMessageError) {
+                setError(userMessageError.message);
+                return;
+            }
+            
+            // Send user message to chatbot api
+            const response = await fetch('api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query: message })
+            })
+
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.message || 'An API error occured.');
+
+            // Save bot reply after
+            const { data: botResponse, error: botMessageError } = await supabase
+                .from('chat_messages')
+                .insert({
+                    session_id: sessionId,
+                    sender: 'bot',
+                    message: data.response
+                 })
+                 .select("*")
+                 .single();
+
+            if (botMessageError) setError(botMessageError.message)
+                
+            return botResponse;
+        } catch (error: unknown) {
+            setError(error instanceof Error ? error.message : 'An unknown error occured.');
+        } finally {
+            setLoading(false);
+        }
+    }
+    return { sendMessage, loading, error };
 }

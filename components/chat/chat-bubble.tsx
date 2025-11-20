@@ -14,7 +14,7 @@ export function ChatBubble({sender, message}: ChatBubbleProps) {
     return (
         <div className={`w-full flex items-start gap-4 ${isSkolar ? 'justify-end' : 'justify-start'}`}>
             {!isSkolar && (
-                <div className='h-10 w-10 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300'></div>
+                <div className='h-10 w-10 rounded-full bg-linear-to-tr from-amber-500 to-yellow-300'></div>
             )}
             <div className={`max-w-5/6 rounded-xl px-4 py-2 ${bubbleStyles}`}>{message}</div>
         </div>

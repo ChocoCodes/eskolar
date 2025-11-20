@@ -83,3 +83,11 @@ export type Scholarship = {
 export const toTitleCase = (str: string) => {
   return str.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
 }
+
+export type Message = {
+    id?: string;
+    session_id: string;
+    sender: 'skolar' | 'bot';
+    message: string;
+    sent_at: string;
+}
