@@ -5,6 +5,20 @@ type ChatBubbleProps = {
     message: string;
 }
 
+export const TypingIndicatorBubble = () => {
+    return (
+        <div className="w-full flex items-start gap-4 justify-start">
+            <div className="w-[70px]">
+                <div className="typing-indicator w-full flex mx-auto justify-between rounded-xl items-center px-4 py-3 bg-white rounded-tl-none border border-gray-300">
+                    <div className="dot dot-1 w-2 h-2 bg-gray-500 rounded-full"></div>
+                    <div className="dot dot-2 w-2 h-2 bg-gray-500 rounded-full"></div>
+                    <div className="dot dot-3 w-2 h-2 bg-gray-500 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 export function ChatBubble({sender, message}: ChatBubbleProps) {
     const isSkolar = sender === 'skolar';
     const bubbleStyles: string = isSkolar

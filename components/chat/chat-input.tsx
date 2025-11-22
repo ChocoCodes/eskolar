@@ -1,8 +1,8 @@
 "use client"
 
-import {Input} from "@/components/ui/input";
-import {Send} from "lucide-react";
-import {useState} from "react";
+import { Input } from "@/components/ui/input";
+import { Send } from "lucide-react";
+import { useState } from "react";
 
 export function ChatInput({onSubmit}: { onSubmit: (message: string) => void }) {
     const [message, setMessage] = useState("");
@@ -16,20 +16,23 @@ export function ChatInput({onSubmit}: { onSubmit: (message: string) => void }) {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="flex items-center shrink-0 space-x-2 p-4 border border-input rounded-xl shadow-md bg-background w-full h-16 min-h-16">
-            <Input
-                type="text"
-                onChange={(e) => setMessage(e.target.value)}
-                value={message}
-                placeholder="Ask me anything about scholarships..."
-                className="grow text-base border-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none h-full p-0"
-            />
-            <button 
-                type='submit' 
-                className="p-2 cursor-pointer flex justify-cent items-center shrink-0 rounded-full hover:bg-gray-100 transition:color duration-200"
-            >
-                <Send className="h-5 w-5 text-gold transform fill-gold"/>
-            </button>
-        </form>
+        <div className="flex flex-col gap-2 w-full">
+            <form onSubmit={handleSubmit} className="flex items-center shrink-0 space-x-2 p-4 border border-input rounded-xl shadow-md bg-background w-full h-16 min-h-16">
+                <Input
+                    type="text"
+                    onChange={(e) => setMessage(e.target.value)}
+                    value={message}
+                    placeholder="Ask me anything about scholarships..."
+                    className="grow text-base border-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none h-full p-0"
+                />
+                <button 
+                    type='submit' 
+                    className="p-2 cursor-pointer flex justify-cent items-center shrink-0 rounded-full hover:bg-gray-100 transition:color duration-200"
+                >
+                    <Send className="h-5 w-5 text-gold transform fill-gold"/>
+                </button>
+            </form>
+            <p className="text-gray-500 text-center">eSBot can make mistakes. Make sure to double check.</p>
+        </div>
     )
 }

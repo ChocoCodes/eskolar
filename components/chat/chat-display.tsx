@@ -6,8 +6,7 @@ import { ChatInput } from "@/components/chat/chat-input";
 import { ChatMessagesDisplay } from "@/components/chat/chat-messages-display";
 import { useRouter } from 'next/navigation';
 import { Message } from '@/lib/utils';
-import { isBot } from 'next/dist/server/web/spec-extension/user-agent';
-import { ChatBubble } from './chat-bubble';
+import { useEffect, useRef } from 'react';
 
 export function ChatDisplay({ name }: { name: string }) {
     const searchParams = useSearchParams();
@@ -16,7 +15,14 @@ export function ChatDisplay({ name }: { name: string }) {
     const { messages, setMessages, loading } = useChatMessages(sessionId || "");
     const { sendMessage, loading: isBotTyping, error: botError } = useSendMessage();
     const router = useRouter();
+    const bottomRef = useRef<HTMLDivElement>(null);
 
+    useEffect(() => {
+        if (!loading) {
+            bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [messages, loading]);
+    
     if (loading) return <p className="text-gray-500 w-full text-center">Loading messages...</p>;
     if (error) return <p className="text-red-500">An error occurred: {error}</p>;
     
@@ -66,10 +72,7 @@ export function ChatDisplay({ name }: { name: string }) {
                                 No messages yet. Start the conversation!
                             </p>
                         )}
-                        <ChatMessagesDisplay messages={ messages }/>
-                        { isBotTyping || botError && (
-                            <ChatBubble sender="bot" message={ botError ? botError : 'eBot is typing...'} />
-                        )}
+                        <ChatMessagesDisplay messages={ messages } isBotTyping={ isBotTyping } botError={ botError } ref={bottomRef}/>
                     </div>
                     <div className="shrink-0">
                         <ChatInput onSubmit={ handleSubmit }/>

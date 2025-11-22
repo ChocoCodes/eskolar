@@ -1,8 +1,9 @@
 "use client";
 import { useState } from 'react';
 import { GrantType, ScholarshipFilters } from "@/lib/utils";
-import { FaLocationDot, FaBookOpen } from "react-icons/fa6";
+import { FaLocationDot, FaBookOpen, FaCheck, FaArrowRotateRight } from "react-icons/fa6";
 import { IoSchool } from "react-icons/io5";
+import { Button } from '../ui/button';
 
 const GRANT_COVERAGE = ['Full Grant', 'Partial Grant', 'Financial Assistance / Aid'];
 const E_RECOMMEND_MATCHES = ['Strong', 'Good', 'Fair'];
@@ -36,8 +37,10 @@ export const ScholarshipFilter = () => {
         }));
     }
     return (
-        <div className="flex flex-col gap-2 justify-center h-9/10 border-2 border-gray-300 rounded-lg w-1/4 px-8 py-2 text-dark-grayish-blue">
-            <p className="text-3xl font-medium text-black">Filters</p>
+        <div className="flex flex-col gap-2 h-9/10 border-2 border-gray-300 rounded-lg w-1/4 px-8 py-2 text-dark-grayish-blue">
+            <div className="pt-6 pb-4">
+                <p className="text-3xl font-medium text-black">Filters</p>
+            </div>
             <label htmlFor='location' className='inline-flex flex-col gap-1 text-lg'>
                 Location
                 <div className="relative w-full">
@@ -120,6 +123,15 @@ export const ScholarshipFilter = () => {
                     className="w-full border-2 border-gray-outline rounded-sm h-8 px-2 text-sm text-dark-grayish-blue bg-white focus:outline-none focus:ring-2 focus:ring-gold"
                 />
             </label>
+
+            <div className="w-full py-4 flex gap-4 justify-center">
+                <Button className="w-2/5 bg-gold hover:cursor-pointer text-lg inline-flex gap-2 hover:bg-gold-hover">
+                    <FaCheck /> Apply
+                </Button>
+                <Button className="w-2/5 border-2 border-gold bg-white text-gold hover:cursor-pointer text-lg hover:border-0 hover:bg-gold hover:text-white">
+                    <FaArrowRotateRight /> Reset
+                </Button>
+            </div>
         </div>
     )
 }
