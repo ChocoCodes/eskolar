@@ -24,32 +24,29 @@ export function ChatDisplay({ name }: { name: string }) {
     }, [messages, loading]);
     
     if (loading) return <p className="text-gray-500 w-full text-center">Loading messages...</p>;
-    if (error) return <p className="text-red-500">An error occurred: {error}</p>;
-    
-    const handleInitialSubmit = async (message: string) => {
-        //if messaging from no session, create a new session
-        const newSessionId = await createChatSession(message);
-
-        if (newSessionId) {
-            router.push(`?sessionId=${newSessionId}`);
-        }
-    }
+    if (error) return <p className="text-red-500">An error occurred: { error }</p>;
 
     const handleSubmit = async (message: string) => {
-        if (!sessionId) return;
+        let sessionIdToUse = sessionId;
+        if (!sessionId) {
+            const newSessionId = await createChatSession(message);
+            // if (!newSessionId) return;
+            router.push(`?sessionId=${newSessionId}`);
+            sessionIdToUse = newSessionId;
+        };
         // Update the user message for the UI first
         setMessages(prev => [
             ...prev,
             {
                 id: crypto.randomUUID(), // temporary only for tracking
-                session_id: sessionId,
+                session_id: sessionIdToUse as string,
                 sender: 'skolar',
                 message: message,
                 sent_at: new Date().toISOString()
             }
         ])
 
-        const botResponse: Message = await sendMessage(sessionId, message);
+        const botResponse: Message = await sendMessage(sessionIdToUse as string, message);
         if (botResponse) {
             setMessages(prev => [...prev, botResponse]);
         }
@@ -62,7 +59,7 @@ export function ChatDisplay({ name }: { name: string }) {
                 ?
                 <div className="flex-1 flex flex-col justify-center items-center gap-6 w-1/2 mx-auto pb-24">
                     <h1 className="text-4xl font-semibold text-gold">Hello, { name }</h1>
-                    <ChatInput onSubmit={ handleInitialSubmit }/>
+                    <ChatInput onSubmit={ handleSubmit }/>
                 </div>
                 :
                 <div className="h-full flex flex-col w-1/2 mx-auto pt-4 pb-8">

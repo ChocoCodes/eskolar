@@ -116,23 +116,14 @@ export const useCreateChatSession = () => {
 
         const newSessionId = data?.id;
 
-        const { error: messageError } = await supabase
-            .from('chat_messages')
-            .insert({
-                session_id: newSessionId,
-                sender: 'skolar',
-                message: message,
-            });
-
         if (authUserError) {
             setError(authUserError);
         } else if (sessionError) {
             setError(sessionError instanceof PostgrestError ? sessionError.message : 'An unknown error occurred.');
-        } else if (messageError) {
-            setError(messageError instanceof PostgrestError ? messageError.message : 'An unknown error occurred.');
         } else {
             setSessionId(newSessionId);
         }
+        
         setLoading(false);
 
         return newSessionId;
