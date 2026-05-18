@@ -16,7 +16,7 @@ export const SignOutButton = () => {
         }
     }
     return (
-        <Button variant="ghost" onClick={ handleSignOut }>
+        <Button variant="ghost" onClick={ handleSignOut } className='hover:cursor-pointer'>
             <PiSignOutFill />
             Sign Out
         </Button>

@@ -20,11 +20,11 @@ export default function ProfilePage() {
     { title: "CREDENTIALS", listItems: showcase.credentials.map((item: { title: string }) => item.title), icon: PiCertificate, listIcon: FaCheck },
     { title: "EXTRACURRICULARS", listItems: showcase.extracurriculars.map((item: { title: string }) => item.title), icon: LuUsersRound, listIcon: FaCheck },
     { title: "SKILLS & INTERESTS", listItems: showcase.skills.map((item: { title: string }) => item.title), icon: IoCodeSlash, listIcon: HiOutlineCpuChip },
-  ]
+  ];
 
   if (loading) return <Loading />;
   if (error) return <p className="text-red">An error occured.</p>;
-  console.log(profile);
+
   return (
     <>
       <Header imageUrl={ profile.profile_url } imageDesc={ profile.full_name }/>

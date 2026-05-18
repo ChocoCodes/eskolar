@@ -37,10 +37,8 @@ export const ScholarshipFilter = () => {
         }));
     }
     return (
-        <div className="flex flex-col gap-2 h-9/10 border-2 border-gray-300 rounded-lg w-1/4 px-8 py-2 text-dark-grayish-blue">
-            <div className="pt-6 pb-4">
-                <p className="text-3xl font-medium text-black">Filters</p>
-            </div>
+        <div className="flex flex-col gap-2 border-2 border-gray-300 rounded-lg w-1/4 px-8 py-4 text-dark-grayish-blue">
+            <p className="text-3xl font-medium text-black">Filters</p>
             <label htmlFor='location' className='inline-flex flex-col gap-1 text-lg'>
                 Location
                 <div className="relative w-full">
@@ -124,7 +122,7 @@ export const ScholarshipFilter = () => {
                 />
             </label>
 
-            <div className="w-full py-4 flex gap-4 justify-center">
+            <div className="w-full pt-2 flex gap-10 justify-center">
                 <Button className="w-2/5 bg-gold hover:cursor-pointer text-lg inline-flex gap-2 hover:bg-gold-hover">
                     <FaCheck /> Apply
                 </Button>
