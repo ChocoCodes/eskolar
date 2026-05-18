@@ -18,9 +18,9 @@ export const SocialIcon = ({ url, platform }: SocialLink) => {
       href={ url }
       target="_blank"
       rel="noopener noreferrer"
-      className="hover:opacity-75 transition"
+      className="text-gray-600 hover:text-gray-700"
     >
-      <Icon className="w-7 h-7 text-gray-700" />
+      <Icon className="text-3xl" />
     </Link>
   )
 }

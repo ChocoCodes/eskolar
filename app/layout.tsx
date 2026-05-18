@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Inter } from "next/font/google";
 import localFont from 'next/font/local'
 
 import "./globals.css";
@@ -12,6 +12,11 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const inter = Inter({ 
+  variable: "--font-inter",
+  subsets: ["latin"]
 });
 
 const satoshi = localFont({
@@ -76,8 +81,8 @@ export const metadata: Metadata = {
   description: "Centralized Scholarship Management Platform",
   icons: [
     { url: '/eSkolar.ico'},
-    { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png'},
-    { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png'},
+    { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
   ]
 };
 
@@ -89,7 +94,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${satoshi.variable} ${geistSans.variable} ${geistMono.variable} font-satoshi antialiased`}
+        className={`${satoshi.variable} ${geistSans.variable} ${geistMono.variable} ${inter.variable} font-satoshi antialiased`}
       >
         {children}
       </body>

@@ -14,12 +14,19 @@ export const ProfileInfo = ({ profile, awards }: { profile: any, awards: any }) 
     }
 
     return (
-        <div className="flex flex-col gap-6 w-full justify-between px-12 -mt-6">
+        <div className="flex flex-col gap-6 w-full justify-between px-12 mt-2">
             {/* ====== INFORMATION ====== */}
             <div className="flex flex-col gap-1">
-                <div className="flex items-center justify-left gap-4">
-                    <h1 className='text-4xl font-medium'>{ profile.full_name }</h1>
-                    <p className='text-lg text-gray-500'>{ handlePronouns(profile.gender) }</p>
+                <div className="flex items-center justify-between">
+                    <div className='flex gap-4 items-center'>
+                        <h1 className='text-4xl font-medium'>{ profile.full_name }</h1>
+                        <p className='text-lg text-gray-500'>{ handlePronouns(profile.gender) }</p>
+                    </div>
+                    <div className="flex gap-3">
+                        { profile.links.map((link: any, i: number) => (
+                            <SocialIcon key={ i } url={ link.url } platform={ link.platform } />
+                        ))}
+                    </div>
                 </div>
                 <div className="flex flex-col text-lg">
                     <p>{ profile.highest_degree }</p>
@@ -28,11 +35,6 @@ export const ProfileInfo = ({ profile, awards }: { profile: any, awards: any }) 
                 <div className="flex items-center gap-6 text-md">
                     <p className=' text-gray-500'>{`${ profile.city }, ${ profile.region }`}</p>
                     <p className='underline text-blue-500'>{ profile.email }</p>
-                    <div className="flex gap-2">
-                        { profile.links.map((link: any, i: number) => (
-                            <SocialIcon key={ i } url={ link.url } platform={ link.platform } />
-                        ))}
-                    </div>
                 </div>
                 <Link 
                     href={'#'} 
