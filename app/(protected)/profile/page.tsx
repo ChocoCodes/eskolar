@@ -15,6 +15,7 @@ import { HiOutlineCpuChip } from "react-icons/hi2";
 
 export default function ProfilePage() {
   const { profile, showcase, loading, error } = useEskolar();
+
   const profileSummary = [
     { title: "ACHIEVEMENTS", listItems: showcase.achievements.map((item: { title: string }) => item.title), icon: GoTrophy, listIcon: FaCheck },
     { title: "CREDENTIALS", listItems: showcase.credentials.map((item: { title: string }) => item.title), icon: PiCertificate, listIcon: FaCheck },
@@ -30,21 +31,21 @@ export default function ProfilePage() {
       <Header imageUrl={ profile.profile_url } imageDesc={ profile.full_name }/>
       <BetaNotice /> 
       {/* ====== CONTAINER PROFILE DISPLAY ====== */}
-      <section className="w-9/10 mx-auto grid grid-cols-5 gap-10 h-screen overflow-x-hidden">
+      <section className="w-9/10 mx-auto grid grid-cols-5 gap-10 overflow-x-hidden pt-8">
         {/* ====== CONTAINER PROFILE SUMMARY ====== */}
-        <div className='w-full col-span-2 grid grid-rows-4 gap-3 h-9/10 my-auto'>
+        <div className='w-full col-span-2 grid grid-rows-4 gap-5 h-full'>
           { profileSummary.map((section, i) => (
             <SummarySection key={ i } { ...section }/>
           ))}
         </div>
         {/* ====== CONTAINER PROFILE MAIN ====== */}
         <div className='col-span-3 flex justify-center items-center'>
-          <div className="relative overflow-hidden flex flex-col gap-4 w-full h-9/10 rounded-xl border-2 border-gray-outline">
+          <div className="relative overflow-hidden flex flex-col gap-4 w-full rounded-xl border-2 border-gray-outline">
             <ProfileHeader coverUrl={ profile.cover_url } profileUrl={ profile.profile_url } profileName={ profile.full_name } /> 
             <div className="pt-3 flex flex-col gap-2">
               <ProfileInfo profile={ profile } awards={ showcase.awards } />  
               {/* ====== ACADEMIC STATS ====== */}
-              <div className="flex flex-col px-12 gap-2 py-4">
+              <div className="flex flex-col px-12 gap-2 py-8">
                   <p className='-mt-2 text-xl font-semibold'>My Academic Stats</p>
                   <div className="flex w-full gap-10">
                       <div className="flex flex-col">

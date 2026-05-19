@@ -8,16 +8,23 @@ import { useEskolar } from "@/hooks/useEskolar";
 import { ScholarshipFilter } from "@/components/discover/scholarship-filter";
 import { scholarshipDataSample } from "@/lib/dummy-data/discover";
 import { ScholarshipCard } from "@/components/discover/scholarship-card";
-import { Scholarship } from '@/lib/utils';
 import { SearchBar } from '@/components/discover/search-bar';
+import { useScholarships, Scholarship } from '@/hooks/useScholarships';
 
 export default function DiscoverPage() {
-    const { profile, loading, error } = useEskolar();
-    const [scholarships] = useState<Scholarship[]>(scholarshipDataSample);
-    const [filtered, setFiltered] = useState<Scholarship[]>(scholarships);
+    const { profile, loading: profileLoading, error: profileError } = useEskolar();
+    const { scholarships, loading: scholarshipLoading, error: scholarshipError } = useScholarships();
+
+    const [filtered, setFiltered] = useState<Scholarship[]>([]);
     
-    if (loading) return <Loading />;
-    if (error) return <p>{ error }</p>;
+    useEffect(() => {
+        if (scholarships) {
+            setFiltered(scholarships);
+        }
+    }, [scholarships]);
+
+    if (profileLoading || scholarshipLoading) return <Loading />;
+    if (profileError || scholarshipError) return <p>{ profileError || scholarshipError }</p>;
     
     return (
         <>
@@ -29,7 +36,7 @@ export default function DiscoverPage() {
                     <SearchBar scholarships={ scholarships } onSearch={ results => setFiltered(results) } />
                     <div className="flex flex-wrap h-4/5 gap-3 justify-center">
                         {filtered.map(scholarship => (
-                            <ScholarshipCard key={ scholarship.programName } scholarship={ scholarship } />
+                            <ScholarshipCard key={ scholarship.id } scholarship={ scholarship } />
                         ))}
                     </div>
                 </div>

@@ -52,7 +52,7 @@ export const useEskolar = () => {
             .select("title, category")
             .eq("profile_id", eSkolarProfile.id);
         
-        console.log('showcase:', JSON.stringify(eSkolarShowcase, null, 2));
+        // console.log('showcase:', JSON.stringify(eSkolarShowcase, null, 2));
         if (showcaseError) {
             setError(showcaseError.message);
             setLoading(false);
@@ -67,7 +67,7 @@ export const useEskolar = () => {
             awards: eSkolarShowcase?.filter(item => item.category === "awards") || [],
         }
 
-        console.log({ ...sorted })
+        // console.log({ ...sorted })
         setShowcase(sorted);
 
         const { data: digitalLinks, error: digitalLinksError } = await supabase

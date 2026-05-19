@@ -20,7 +20,7 @@ export const scholarshipDataSample: Scholarship[] = [
         issuer: "Labistre Foundation",
         financialCoverage: "partial grant",
         status: "ongoing",
-        eligibility: "2025-2026 HUMMS student",
+        eligibility: "2025-2026 HUMSS student",
         awardValue: 67000,
         deadline: "8 Oct 2025",
         cutoff: 85,
