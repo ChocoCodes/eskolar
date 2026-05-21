@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useSupabaseAuthUser, useSupabaseClient } from './useSupabase';
 
+type ScoreBreakdown = {
+    eligibility: number;
+    profile: number;
+};
+
 export interface Scholarship {
     id: number;
     provider_name: string;
@@ -17,6 +22,7 @@ export interface Scholarship {
     annual_family_income: number | null;
     tags: string[];
     e_recommend?: number;
+    breakdown?: ScoreBreakdown;
     match?: string;
 }
 
@@ -102,6 +108,7 @@ export const useScholarships = () => {
                     return {
                         ...scholarship,
                         e_recommend: matchedMetric.e_recommend || 0.0,
+                        breakdown: matchedMetric.breakdown || {},
                         match: matchedMetric.match || "Poor"
                     }
                 })

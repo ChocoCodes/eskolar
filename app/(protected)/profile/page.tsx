@@ -24,7 +24,7 @@ export default function ProfilePage() {
   ];
 
   if (loading) return <Loading />;
-  if (error) return <p className="text-red">An error occured.</p>;
+  if (error) return <p className="text-red-400">An error occured. { error }</p>;
 
   return (
     <>

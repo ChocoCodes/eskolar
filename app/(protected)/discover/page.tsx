@@ -6,7 +6,6 @@ import Header from "@/components/shared/header";
 import { Loading } from "@/components/shared/loading";
 import { useEskolar } from "@/hooks/useEskolar";
 import { ScholarshipFilter } from "@/components/discover/scholarship-filter";
-import { scholarshipDataSample } from "@/lib/dummy-data/discover";
 import { ScholarshipCard } from "@/components/discover/scholarship-card";
 import { SearchBar } from '@/components/discover/search-bar';
 import { useScholarships, Scholarship } from '@/hooks/useScholarships';
@@ -23,8 +22,8 @@ export default function DiscoverPage() {
         }
     }, [scholarships]);
 
+    if (profileError || scholarshipError) return <p className="text-red-400">An error occured: { profileError || scholarshipError }</p>;
     if (profileLoading || scholarshipLoading) return <Loading />;
-    if (profileError || scholarshipError) return <p>{ profileError || scholarshipError }</p>;
     
     return (
         <>
@@ -32,7 +31,7 @@ export default function DiscoverPage() {
             <BetaNotice />
             <section className="h-screen overflow-x-hidden py-2 flex gap-12 items-center justify-center px-12"> 
                 <ScholarshipFilter />
-                <div className="flex flex-col gap-10 h-9/10 w-3/4 overflow-auto">
+                <div className="flex flex-col gap-10 w-3/4 h-9/10 overflow-auto">
                     <SearchBar scholarships={ scholarships } onSearch={ results => setFiltered(results) } />
                     <div className="flex flex-wrap h-4/5 gap-3 justify-center">
                         {filtered.map(scholarship => (

@@ -6,6 +6,32 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+export const mapRecommendMatch: Record<string, string> = {
+    strong: 'border-green-600 text-green-600',
+    good: 'border-yellow-500 text-yellow-500',
+    fair: 'border-blue-500 text-blue-600',
+};
+
+export const mapStatus: Record<string, string> = {
+    ongoing: 'bg-green-800',
+    closed: 'bg-red-500'
+};
+
+export const formatDeadlineWithLocale = (dateString: string): string => {
+    if (!dateString) return "N/A";
+
+    const [year, month, day] = dateString.split('-').map(Number);
+    
+    // month - 1 because JavaScript months run from 0 (January) to 11 (December)
+    const localDate = new Date(year, month - 1, day);
+
+    return localDate.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+    });
+};
+
 export const timeSinceUpdate = (dateString: string): string => {
     const pastDate = new Date(dateString);
     const now = new Date();
