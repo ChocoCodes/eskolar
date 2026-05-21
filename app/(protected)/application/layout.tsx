@@ -3,6 +3,7 @@ import React from "react";
 import Header from "@/components/shared/header";
 import { Loading } from '@/components/shared/loading';
 import { useEskolar } from "@/hooks/useEskolar";
+import { BetaNotice } from "@/components/shared/beta-notice";
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { profile, loading, error } = useEskolar();
@@ -12,6 +13,7 @@ function Layout({ children }: { children: React.ReactNode }) {
   return (
     <main>
       <Header imageUrl={profile.profile_url} imageDesc={profile.full_name} />
+      <BetaNotice />
       {children}
     </main>
   );

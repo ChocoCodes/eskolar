@@ -12,9 +12,9 @@ import { FaThumbsUp } from "react-icons/fa6";
 
 export const ScholarshipCard = ({ scholarship }: { scholarship: Scholarship }) => {
     const mapRecommendMatch: Record<string, string> = {
-        strong: 'border-green-600 text-green-600',
+        strong: 'border-green-600 text-green-600 hover:bg-green-600 hover:text-background',
         good: 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-background',
-        fair: 'border-yellow-500 text-yellow-600',
+        fair: 'border-yellow-500 text-yellow-600 hover:bg-green-600 hover:text-background',
     };
 
     const handleRecommend = (scholarship: Scholarship) => {
@@ -22,7 +22,7 @@ export const ScholarshipCard = ({ scholarship }: { scholarship: Scholarship }) =
     } 
 
     return (
-        <Card className='w-[48%] flex flex-col justify-between px-4 shadow-md hover:-translate-y-2 hover:shadow-lg transition-transform duration-200'>
+        <Card className='w-[48%] flex flex-col justify-between px-4 shadow-md hover:-translate-y-1 hover:shadow-lg transition-transform duration-200'>
             <CardHeader className='w-full'>
                 <div className="flex gap-8">
                     <div className='relative w-24 h-24'>
