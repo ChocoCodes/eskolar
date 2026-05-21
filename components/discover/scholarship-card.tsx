@@ -7,18 +7,22 @@ import {
     CardFooter
 } from '@/components/ui/card';
 import Link from 'next/link'
-// import { toTitleCase } from '@/lib/utils';
-// import { FaThumbsUp } from "react-icons/fa6";
+import { toTitleCase } from '@/lib/utils';
+import { FaThumbsUp } from "react-icons/fa6";
 
 export const ScholarshipCard = ({ scholarship }: { scholarship: Scholarship }) => {
     const mapRecommendMatch: Record<string, string> = {
         strong: 'border-green-600 text-green-600',
-        good: 'border-blue-600 text-blue-600',
+        good: 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-background',
         fair: 'border-yellow-500 text-yellow-600',
     };
 
+    const handleRecommend = (scholarship: Scholarship) => {
+
+    } 
+
     return (
-        <Card className='w-[450px] h-[400px] flex flex-col justify-between px-4'>
+        <Card className='w-[48%] flex flex-col justify-between px-4 shadow-md hover:-translate-y-2 hover:shadow-lg transition-transform duration-200'>
             <CardHeader className='w-full'>
                 <div className="flex gap-8">
                     <div className='relative w-24 h-24'>
@@ -53,7 +57,7 @@ export const ScholarshipCard = ({ scholarship }: { scholarship: Scholarship }) =
                         <p className='text-2xl font-medium'>{ scholarship.slots }</p>
                     </div>
                 </div>
-                <div className="flex gap-3">
+                <div className="flex gap-1">
                     {scholarship.tags.map((tag, i) => (
                         <p key={ i } className='p-1 border-2 text-xs border-blue-500 rounded-sm text-blue-500'>{ tag }</p>
                     ))}
@@ -64,18 +68,19 @@ export const ScholarshipCard = ({ scholarship }: { scholarship: Scholarship }) =
                     href="#" 
                     className="text-dark-grayish-blue hover:underline"
                     onClick={(e) => {
-                        e.preventDefault()
-                        alert("Coming Soon!")
+                        e.preventDefault();
+                        alert("Coming Soon!");
                     }}
                     >
                     See Full Details &rarr;
                 </Link>
-                {/*
-                    <div className={`flex gap-2 items-center border-2 py-1 px-2 rounded-sm text-sm ${ mapRecommendMatch[scholarship.eRecommendMatch?.toLowerCase()] || "bg-gray-300" }`}>
-                        <FaThumbsUp />
-                        <p>{ toTitleCase(scholarship.eRecommendMatch) } Match</p>
-                    </div>
-                */}
+                <button 
+                    onClick={ () => handleRecommend(scholarship) }
+                    className={`flex gap-2 items-center border-2 py-1 px-2 rounded-sm text-sm ${ mapRecommendMatch[scholarship.match?.toLowerCase() || ""] || "bg-gray-300" } hover:cursor-pointer transition-colors duration-200`}
+                >
+                    <FaThumbsUp />
+                    { scholarship.match && <p>{ toTitleCase(scholarship.match) } Match</p> }
+                </button>
             </CardFooter>
         </Card>
     )
