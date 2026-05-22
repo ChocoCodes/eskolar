@@ -15,7 +15,7 @@ export const ScoreRing = ({ score }: ScoreRingProps) => {
     }
 
     return (
-        <div className="relative w-32 h-32 flex items-center justify-center">
+        <div className="relative w-26 h-26 flex items-center justify-center">
             <svg 
                 className="absolute inset-0 w-full h-full -rotate-90" 
                 viewBox="0 0 144 144"
@@ -37,7 +37,7 @@ export const ScoreRing = ({ score }: ScoreRingProps) => {
                     className="transition-all duration-700"
                 />
             </svg>
-            <p className="relative text-2xl font-bold">{score}</p>
+            <p className="relative text-xl font-bold">{score}</p>
         </div>
     );
 }

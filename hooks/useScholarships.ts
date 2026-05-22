@@ -1,28 +1,32 @@
 import { useState, useEffect } from 'react';
 import { useSupabaseAuthUser, useSupabaseClient } from './useSupabase';
+import { getStudentProfileQuery } from '@/lib/supabase/query';
 
 type ScoreBreakdown = {
     eligibility: number;
     profile: number;
+    academic: number;
+    income: number;
+    bonus: number;
 };
 
 export interface Scholarship {
     id: number;
     provider_name: string;
-    program_name: string;
+    program_img_url: string;
     award_value: number;
+    slots: number;
+    tags: string[];
+    breakdown?: ScoreBreakdown;
+    program_name: string;
     status: string;
     grant_type: string;
     deadline: string;
     cutoff_grade: number;
-    program_img_url: string;
     description: string;
-    eligibility: string;
-    slots: number;
     annual_family_income: number | null;
-    tags: string[];
+    eligibility: string;
     e_recommend?: number;
-    breakdown?: ScoreBreakdown;
     match?: string;
 }
 
@@ -42,29 +46,7 @@ export const useScholarships = () => {
                 setLoading(true);
                 setError(null);
 
-                const { data: studentData, error: studentError } = await supabase
-                    .from('profiles')
-                    .select(`
-                        full_name,
-                        city,
-                        region,
-                        bio,
-                        gwa,
-                        highest_degree,
-                        date_of_birth,
-                        annual_family_income,
-                        special_group,
-                        profile_items(
-                            title,
-                            description,
-                            issuer,
-                            organization,
-                            category,
-                            duration
-                        )
-                    `)
-                    .eq('user_id', user.id)
-                    .single();
+                const { data: studentData, error: studentError } = await getStudentProfileQuery(supabase, user.id);
                                 
                 if (studentError) throw studentError;
 
