@@ -31,7 +31,7 @@ export default function ProfilePage() {
       <Header imageUrl={ profile.profile_url } imageDesc={ profile.full_name }/>
       <BetaNotice /> 
       {/* ====== CONTAINER PROFILE DISPLAY ====== */}
-      <section className="w-9/10 mx-auto grid grid-cols-5 gap-10 overflow-x-hidden pt-8">
+      <section className="w-9/10 mx-auto grid grid-cols-5 gap-10 overflow-x-hidden pt-4">
         {/* ====== CONTAINER PROFILE SUMMARY ====== */}
         <div className='w-full col-span-2 grid grid-rows-4 gap-5 h-full'>
           { profileSummary.map((section, i) => (

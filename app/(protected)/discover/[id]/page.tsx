@@ -60,6 +60,7 @@ export default function ScholarshipPage() {
                 setAnalysisLoading(true);
                 setAnalysisError(null);
                 
+                // Exclude destructured field/s
                 const { full_name, city, region, ...studentPayload } = studentData as Record<string, any>;
                 const { id, provider_name, award_value, program_img_url, slots, tags, breakdown, ...scholarshipPayload } = scholarship as Record<string, any>;
                 const breakdownPayload = breakdown ? { ...breakdown } : null;
@@ -138,9 +139,9 @@ export default function ScholarshipPage() {
                     <div className="flex flex-col gap-3 -mt-3">
                         <p className='font-semibold'>Description</p>
                         <p>{ scholarship.description }</p>
-                        <div className="flex gap-1">
+                        <div className="flex gap-3">
                             {scholarship.tags.map((tag, i) => (
-                                <p key={ i } className='p-1 border-2 text-xs border-blue-500 rounded-sm text-blue-500'>{ tag }</p>
+                                <p key={ i } className='px-2 py-1 border-2 text-xs border-blue-500 rounded-sm text-blue-500'>{ tag }</p>
                             ))}
                         </div>
                     </div>
@@ -158,11 +159,12 @@ export default function ScholarshipPage() {
                     </div>
                     <div className="flex flex-col gap-1 border border-gray-400 rounded-lg p-3 shadow-sm">
                         <p className='font-semibold text-base'>Score Breakdown</p>
-                        <ProgressBar label="Eligibility" weight='80%' value={ scholarship.breakdown?.eligibility || 0 } max={ 80 }/>
-                        <ProgressBar label="Profile" weight='20%' color='bg-gold' value={ scholarship.breakdown?.profile || 0 } max={ 20 }/>
+                        <ProgressBar label="Eligibility" weight='60%' value={ scholarship.breakdown?.eligibility || 0 } max={ 60 }/>
+                        <ProgressBar label="Profile" weight='40%' color='bg-gold' value={ scholarship.breakdown?.profile || 0 } max={ 40 }/>
                     </div>
                     <div className="flex flex-col gap-1 border border-blue-400 rounded-lg p-3 shadow-sm">
                         <span className="inline-flex items-center gap-1 text-blue-600"><RiChatAiFill /><p className='font-semibold'>eRecommend AI Insights</p></span>
+                        { analysisLoading && <p className='text-muted-foreground text-sm text-center'>Loading Insights...</p> }
                         { analysisError && <p className="text-red-500">Analysis Failed: { analysisError }</p> }
                         { !analysisLoading && !analysisError && <p className='text-xs'>{ analysis }</p> }
                     </div>

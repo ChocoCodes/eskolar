@@ -1,4 +1,5 @@
 "use client"
+import ReactMarkdown from 'react-markdown';
 
 type ChatBubbleProps = {
     sender: 'skolar' | 'bot';
@@ -30,7 +31,21 @@ export function ChatBubble({sender, message}: ChatBubbleProps) {
             {!isSkolar && (
                 <div className='h-10 w-10 rounded-full bg-linear-to-tr from-amber-500 to-yellow-300'></div>
             )}
-            <div className={`max-w-5/6 rounded-xl px-4 py-2 ${bubbleStyles}`}>{message}</div>
+            <div className={`prose prose-sm wrap-break-word max-w-5/6 rounded-xl px-4 py-2 ${bubbleStyles}`}>
+                {isSkolar ? <p>{ message }</p> : (
+                    <ReactMarkdown
+                        components={{
+                            ol: ({ node, ...props }) => <ol className="list-decimal pl-4 my-1 space-y-0.5" {...props} />,
+                            ul: ({ node, ...props }) => <ul className="list-disc pl-4 my-1 space-y-0.5" {...props} />,
+                            li: ({ node, ...props }) => <li className="m-0" {...props} />,
+                            a: ({ node, ...props }) => <a className="text-blue-600 underline hover:text-blue-700" target="_blank" rel="noreferrer" {...props} />,
+                        }}
+                    >
+                        { message }
+                    </ReactMarkdown>
+                    )
+                }
+            </div>
         </div>
     )
 }

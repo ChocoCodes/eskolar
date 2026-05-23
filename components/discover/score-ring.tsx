@@ -9,9 +9,10 @@ export const ScoreRing = ({ score }: ScoreRingProps) => {
     const dashOffset = circumference * (1 - progress);
 
     const getColor = (score: number) => {
-        if (score >= 80) return '#fdb913'; // gold/yellow
-        if (score >= 60) return '#2563EB'; // blue
-        return '#D97706';                  // amber
+        if (score >= 90.0) return '#fdb913'; // gold/yellow - strong
+        if (score >= 75.0) return '#2563EB'; // blue - good
+        if (score >= 60.0) return '#10B981' // green - fair
+        return '#EF4444';                  // amber - low
     }
 
     return (

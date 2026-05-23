@@ -45,6 +45,7 @@ export default function Header({ imageUrl, imageDesc }: HeaderProps ) {
                   src={ imageUrl }
                   alt={`Picture of ${imageDesc}`}
                   fill
+                  unoptimized
                   className="object-cover rounded-full"
                 />
               </Button>

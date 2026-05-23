@@ -6,9 +6,10 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const mapRecommendMatch: Record<string, string> = {
-    strong: 'border-green-600 text-green-600',
-    good: 'border-yellow-500 text-yellow-500',
-    fair: 'border-blue-500 text-blue-600',
+    strong: 'border-gold text-gold',
+    good: 'border-blue-500 text-blue-600',
+    fair: 'border-emerald-500 text-emerald-600',
+    low: 'border-red-400 text-red-500'
 };
 
 export const mapStatus: Record<string, string> = {
